@@ -1,0 +1,102 @@
+<% layout( '../layout') -%>
+
+<style>
+      .entry {
+        background-color: #eee;
+        border-radius: 8px;
+        margin: .5em;
+        padding: .5em;
+    }
+    
+    .entry img {
+        margin-bottom: 5px;
+    }
+
+    .reserve-book{
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+    #have-account{
+        margin-top: 1em;
+    }
+</style>
+
+<span id="organizations"><!-- id for this page so css targeting is easier -->
+
+<h1>Organizations Page</h1>
+
+
+<div class='jumbotron'>
+
+You can also <strong>start your own organization and compete for prizes</strong>. Click on enter the competition and tell us the location where you can set up a box. We will send the box to you and pick it up at the end of the semester or whenever it's full. You only need to encourage people to donate!
+  <div class='demo-row row'>
+    <!-- <div class='col-xs-4'> -->
+    <div>
+      <!-- <a class='btn btn-block btn-lg btn-info' title='Check the list of organizations' href='/organizations/login'>Enter the Competition </a> -->
+      <h5>Contact us for parternship opportunities on <a href="/contact">our contact page!</a></h5>
+    </div>
+    <div id="have-account">
+        <h6>Have an Account? <a class='btn btn-lg btn-info' title='Check the list of organizations' href='/organizations/login'>Sign in</a></h6>
+    </div>
+  </div>
+  
+	<div class="sub-section">
+		<h1>Annual R.E.A.D. Competition</h1>
+		<ul>
+			<li>Redistributing Educational Assets Drive</li>
+			<li>Competitive collection of educational resources such as textbooks and iClickers</li>
+			<li>Participants are Fraternities and Sororities, chapter vs. chapter</li>
+		</ul>
+		<h1>R.E.A.D.</h1>
+		<ul>
+			<li>Chapters can collect assets for a week and a half through personal donation or solicitation</li>
+			<li>Score is determined by the total monetary value of donated resources divided by number of chapter members
+			<br><span class="italic">Score = Total $$ Value / Chapter Members</span></li>
+		</ul>
+		<h1>Competition Rules</h1>
+		<ul>
+			<li>Chapters sign up on a page distributed by email (Thanks Ben Quinn!)</li>
+			<li>Boxes distributed to the chapters</li>
+			<li>Chapters make their own goals, receive publicity for meeting the goal</li>
+			<li>Winners are announced at Greek Chapter Awards, receive "grand prize"</li>
+		</ul>
+		
+		
+	</div>
+  
+</div>
+
+<p class="lead"><strong> List of Box Locations</strong></p>
+<script src="/bower_components/handlebars/handlebars.min.js"></script>
+
+<script id="entry-template" type="text/x-handlebars-template">
+    {{#each organizations}}
+    <% include ../partials/organization-template %>
+    {{/each}}
+</script>
+
+<div id="results"></div>
+
+<script>
+$(function() {
+    var source = $("#entry-template").html();
+    var template = Handlebars.compile(source);
+
+    var criteria = {};
+    $.getJSON('/api/organizations', criteria)
+        .done(function(organizations) {
+            if (organizations.length === 0) {
+                var html = '<strong>No organizations yet. Stay tuned.</strong>';
+            } else {
+                var html = template({organizations: organizations});
+            }
+            $("#results").html(html);
+        })
+        .fail(function(data, status, xhr) {
+            alert('something went wrong'); // TODO
+        });
+});
+</script>
+
+</span><!--  end organizations id span -->
