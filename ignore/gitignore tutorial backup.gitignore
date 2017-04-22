@@ -1,0 +1,70 @@
+ignore/file.txt
+
+#ignore nested repo
+ignore/Didn't mean to include/
+
+/ignore/#hashtag file.txt
+
+#ignoring a file startign with number sign must be escaped
+\#hashtag file.txt
+
+#ignores also matches a file with no extension
+ignore/ambigous
+
+#ignore a FOLDER
+ignore/ambigous/
+
+#gitignore is space sensitive
+ignore/2  spaces  between  words.txt
+
+#ignore htm & html files
+*.htm*
+
+#ignore .class files for java
+*.class
+
+#all files "potato" somewhere in the name
+*potato*
+
+#ignore "parent" followed by 1 character
+#ignore/parent/parent?.txt
+
+# "parent" followed by any 2 characters
+#ignore/parent/parent??.txt
+
+# "parent" followed by any letter in alphabet
+#ignore/parent/parent[a-z].txt
+
+# "parent" followed by 1 alphanumeric character
+#ignore/parent/parent[A-Z0-9].txt
+
+#ignore "parent" followed by 1 digit
+ignore/parent/parent[0-9].txt
+
+#ignore "parent" followed by 2 digits
+ignore/parent/parent[0-9][0-9].txt
+
+# "parent" followed by anything that's no a digit
+ignore/parent/parent[!0-9].txt
+
+
+#ignore all folders called "cool" (double *)
+**/cool/
+
+ignore/awesome/awesome.txt
+
+#any number of folders between "top" & "bottom"
+ignore/top/**/bottom/
+
+#ignore top for now
+ignore/top/
+
+#ignore parent, then include subfolder with !
+#ignore/parent/*
+#!ignore/parent/middle include/
+
+ignore/parent/*
+!ignore/parent/exclude middle/
+
+ignore/parent/exclude middle/*
+!ignore/parent/exclude middle/bottom include/
